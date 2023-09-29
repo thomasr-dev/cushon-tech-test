@@ -66,6 +66,9 @@ I have assumed that we should attempt to enforce the government rules on ISAs, i
 investments into a single ISA during each tax year, and limiting the total deposits made each tax year in accordance
 with the limit from https://www.gov.uk/individual-savings-accounts.
 
+As it is allowable for customers to invest in one of each type of ISA during each tax year, I have provided the ability
+to select an account to invest into as well as the fund to use and investment amount.
+
 ## Choices made
 If this was to be a complete application, I would probably implement it as REST API using OAuth authentication. This
 should allow the same backend to be used by both a web frontend (potentially using React or similar) and native mobile
