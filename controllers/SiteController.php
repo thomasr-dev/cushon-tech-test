@@ -2,6 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Account;
+use app\models\Customer;
+use app\models\Fund;
+use app\models\Investment;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +65,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $investment = new Investment();
+        $investment->scenario = Investment::SCENARIO_NEW_INVESTMENT;
+
+        // In a real application then we would of course load the customer from an authentication system.
+        $customer = Customer::findOne(1);
+
+        if ($investment->load(Yii::$app->request->post()) && $investment->validate()) {
+            $investment->save();
+            return $this->render('investment-success', ['investment' => $investment]);
+        }
+
+        return $this->render(
+            'index',
+            [
+                'investment' => $investment,
+                'accounts' => Account::find()->where(['customer_id' => $customer->id])->all(),
+                'funds' => Fund::find()->all()
+            ]
+        );
     }
 
     /**

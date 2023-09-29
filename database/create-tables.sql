@@ -1,5 +1,5 @@
 -- Create all tables
-CREATE TABLE isaType
+CREATE TABLE isa_type
 (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL DEFAULT NULL,
     name VARCHAR(255) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE isaType
     PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE depositLimit
+CREATE TABLE investment_limit
 (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL DEFAULT NULL,
     tax_year_end SMALLINT UNSIGNED NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE product
     isa_type_id INT UNSIGNED NOT NULL,
     UNIQUE INDEX(name),
     PRIMARY KEY(id),
-    FOREIGN KEY(isa_type_id) REFERENCES isaType(id) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY(isa_type_id) REFERENCES isa_type(id) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
 CREATE TABLE fund
@@ -68,10 +68,10 @@ CREATE TABLE investment
 ) ENGINE=InnoDB;
 
 -- Populate default application data
-INSERT INTO isaType(id, name)
+INSERT INTO isa_type(id, name)
 VALUES(1, 'Stocks and shares'), (2, 'Cash'), (3, 'Lifetime'), (4, 'Innovative Finance'), (5, 'Junior');
 
-INSERT INTO depositLimit(id, tax_year_end, annual_limit)
+INSERT INTO investment_limit(id, tax_year_end, annual_limit)
 VALUES(1, 2024, 20000);
 
 INSERT INTO product(id, name, isa_type_id)
